@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundry Run Watcher v01.00</title>
+  <link rel="stylesheet" href="app.css?v=01.00" />
+</head>
+<body>
+  <!-- Pause banner (visible only when pause != null) -->
+  <div id="pause-banner" aria-live="assertive" hidden>
+    <span class="pause-badge">⏸ PAUSED</span>
+    <span class="pause-kind"></span>
+    <span class="pause-sep">·</span>
+    <span class="pause-node-label">node:</span>
+    <span class="pause-node"></span>
+    <span class="pause-sep">·</span>
+    <span class="pause-preview"></span>
+    <span class="pause-sep">·</span>
+    <span id="pause-countdown" aria-live="polite">—</span>
+  </div>
+
+  <!-- Stale indicator -->
+  <div id="stale-indicator" aria-live="polite" hidden></div>
+
+  <!-- Phase strip (always rendered) -->
+  <section id="phase-strip-section" aria-label="Pipeline phases">
+    <ol id="phase-strip" role="list"></ol>
+  </section>
+
+  <!-- Body grid: single column on mobile, three panes at ≥1280px -->
+  <div class="body-grid">
+
+    <!-- LEFT pane: Inspect + Queue -->
+    <div class="pane pane-left">
+      <section aria-label="Run inspect">
+        <div id="inspect-pane">
+          <p id="inspect-empty">Click a run row to inspect it.</p>
+        </div>
+      </section>
+
+      <section aria-label="Queue">
+        <h2>Queue</h2>
+        <ul id="queue-list" role="list"></ul>
+      </section>
+    </div>
+
+    <!-- MIDDLE pane: Artifact tree + File preview -->
+    <div class="pane pane-middle">
+      <section aria-label="Artifacts">
+        <h2>Artifacts</h2>
+        <details id="artifact-details">
+          <summary class="artifact-toggle">Files</summary>
+          <ul id="artifact-list" role="list"></ul>
+        </details>
+      </section>
+
+      <section id="preview-pane" style="display:none;" aria-label="File preview">
+        <h2>File preview</h2>
+        <div id="preview-content"></div>
+      </section>
+    </div>
+
+    <!-- RIGHT pane: Recent runs + Log tails -->
+    <div class="pane pane-right">
+      <section aria-label="Recent runs">
+        <h2>Recent runs</h2>
+        <ul id="runs-list" role="list"></ul>
+      </section>
+
+      <section aria-label="Launchd stdout">
+        <h3>stdout</h3>
+        <pre id="launchd-out-tail" class="log-tail"></pre>
+      </section>
+
+      <section aria-label="Launchd stderr">
+        <h3>stderr</h3>
+        <pre id="launchd-err-tail" class="log-tail"></pre>
+      </section>
+    </div>
+
+  </div><!-- /.body-grid -->
+
+  <footer>
+    <span>Foundry Run Watcher</span>
+    <span class="version">v01.00</span>
+  </footer>
+
+  <script defer src="app.js?v=01.00"></script>
+</body>
+</html>
